@@ -1,0 +1,117 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+dl {
+  overflow:hidden;
+}
+
+dt {
+  float: left;
+  clear: left;
+  min-width: 9em;
+}
+dd {
+  overflow: hidden;
+}
+
+.dt-horizontal {
+ float:left;
+ width:20%; /* adjust the width; make sure the total of both is 100% */
+}
+.dd-horizontal {
+ float:left;
+ width:80%; /* adjust the width; make sure the total of both is 100% */
+}
+
+.image {
+  max-width:200px;
+  display: block;
+  height: auto;
+  border: 1px solid #000000;
+  vertical-align: middle;
+}
+
+.list {
+  padding: 20px;
+  padding-left: 50px;
+  background-color: lightgray;
+}
+
+.list h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+}
+
+.list li:last-child {
+  border: none;
+}
+
+.loader {
+  font-size: 24px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.list-item-appear {
+  opacity: 0.01;
+}
+
+.list-item-appear.list-item-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.list-item-enter {
+  opacity: 0.01;
+  transform: translate(0, 1em);
+}
+
+.list-item-enter.list-item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+  transform:translate(0,0);
+}
+
+.list-item-leave {
+  opacity: 1;
+}
+
+.list-item-leave.list-item-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+  transform:translate(-5em, 0) scale(0,0);
+}
+
+ul {
+  list-style: none;
+}
+
+.itembox {
+  margin:auto;
+  padding:5px;
+  box-shadow:
+    5px 8px 8px rgba(0,0,0,0.75),
+    inset 5px 8px 8px rgba(255,255,255,0.4);
+  background:#fff;
+  text-align: left;
+}
+
+.invalid-value {
+  border: 1px solid red;
+  background-color: lightpink;
+}

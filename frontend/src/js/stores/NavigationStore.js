@@ -1,14 +1,14 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from 'events';
 
 class NavigationStore extends EventEmitter {
   constructor() {
     super();
-    this.page = "about";
+    this.page = 'about';
   }
 
   updatePage(page) {
     this.page = page;
-    this.emit("change");
+    this.emit('change');
   }
 
   getPage() {
