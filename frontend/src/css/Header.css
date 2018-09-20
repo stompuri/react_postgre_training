@@ -1,5 +1,34 @@
+/* Custom page header */
 .header {
-  background-color: #222;
-  padding: 20px;
-  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: 2px solid #bbbbbb;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 10px;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .header {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+}
+
+.header p.small {
+  font-size: 65%;
+  font-weight: normal;
+  line-height: 1;
+  color: #999999;
+  float: left;
+  padding-right: 5px;
 }

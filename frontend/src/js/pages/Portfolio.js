@@ -90,7 +90,7 @@ class Portfolio extends Component {
     const { portfolio_items, loading } = this.state;
 
     var dom = '';
-    /*if (loading) {
+    if (loading) {
       dom = <div className='loader'>Loading...</div>;
     } else {
       dom = <PortfolioList items={portfolio_items} />;
@@ -101,8 +101,6 @@ class Portfolio extends Component {
         { dom }
       </div>
     );
-    */
-    return <PortfolioList items={portfolio_items} />;
   }
 }
 

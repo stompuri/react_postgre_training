@@ -19,8 +19,18 @@ class AddItem extends Component {
       titleValid: false, // required
       locValid: true,
       imgUrlValid: true,
-      linkValid: true
+      linkValid: true,
+      showAddForm: false
     };
+    this.toggleAddForm = this.toggleAddForm.bind(this);
+  }
+
+  toggleAddForm() {
+    var show = false;
+    if (!this.state.showAddForm) {
+      show = true;
+    }
+    this.setState({showAddForm: show});
   }
 
   handleUserInput (e) {
@@ -72,6 +82,10 @@ class AddItem extends Component {
   hasError(isValid) {
     return(isValid ? '' : 'invalid-value');
   }
+  
+  showForm(val) {
+    return(val ? '' : 'hide');
+  }
 
   addItem() {
     const body = {
@@ -104,92 +118,106 @@ class AddItem extends Component {
       titleValid,
       locValid,
       imgUrlValid,
-      linkValid } = this.state;
+      linkValid,
+      showAddForm } = this.state;
     const isEnabled = titleValid && yearValid;
 
     return (
       <div className='container'>
-        <form id='add_item_form' className='formGroup'>
-          <div className='leftcell'>
-            Title:
+        { showAddForm &&
+          <div className='dropdown' onClick={this.toggleAddForm}>
+            Hide Add Form
           </div>
-          <div className='rightcell'>
-            <input
-              id='item_title'
-              name='title'
-              type='text'
-              value={title}
-              className={this.hasError(titleValid)}
-              onChange={(event) => this.handleUserInput(event)} />
+        }
+        { !showAddForm &&
+          <div className='dropdown' onClick={this.toggleAddForm}>
+            Show Add Form
           </div>
-          <div className='leftcell'>
-            Year:
-          </div>
-          <div className='rightcell'>
-            <input
-              id='item_year'
-              name='year'
-              type='text'
-              value={year}
-              className={this.hasError(yearValid)}
-              onChange={(event) => this.handleUserInput(event)} />
-          </div>
-          <div className='leftcell'>
-            Description:
-          </div>
-          <div className='rightcell'>
-            <input id='item_desc' type='text' />
-          </div>
-          <div className='leftcell'>
-            Platform:
-          </div>
-          <div className='rightcell'>
-            <input id='item_platform' type='text' />
-          </div>
-          <div className='leftcell'>
-            Language:
-          </div>
-          <div className='rightcell'>
-            <input id='item_lang' type='text' />
-          </div>
-          <div className='leftcell'>
-            Lines of code:
-          </div>
-          <div className='rightcell'>
-            <input
-              id='item_loc'
-              name='loc'
-              type='text'
-              value={loc}
-              className={this.hasError(locValid)}
-              onChange={(event) => this.handleUserInput(event)} />
-          </div>
-          <div className='leftcell'>
-            Image url:
-          </div>
-          <div className='rightcell'>
-            <input
-              id='item_imgUrl'
-              name='imgUrl'
-              type='text'
-              value={imgUrl}
-              className={this.hasError(imgUrlValid)}
-              onChange={(event) => this.handleUserInput(event)} />
-          </div>
-          <div className='leftcell'>
-            Link:
-          </div>
-          <div className='rightcell'>
-            <input
-              id='item_link'
-              name='link'
-              type='text'
-              value={link}
-              className={this.hasError(linkValid)}
-              onChange={(event) => this.handleUserInput(event)} />
-          </div>
-        </form>
-        <button disabled={!isEnabled} onClick={this.addItem}>Add item</button>
+        }
+
+        <div className={this.showForm(showAddForm)}>
+          <form id='add_item_form' className="formGroup">
+            <div className='leftcell'>
+              Title:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_title'
+                name='title'
+                type='text'
+                value={title}
+                className={this.hasError(titleValid)}
+                onChange={(event) => this.handleUserInput(event)} />
+            </div>
+            <div className='leftcell'>
+              Year:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_year'
+                name='year'
+                type='text'
+                value={year}
+                className={this.hasError(yearValid)}
+                onChange={(event) => this.handleUserInput(event)} />
+            </div>
+            <div className='leftcell'>
+              Description:
+            </div>
+            <div className='rightcell'>
+              <input id='item_desc' type='text' />
+            </div>
+            <div className='leftcell'>
+              Platform:
+            </div>
+            <div className='rightcell'>
+              <input id='item_platform' type='text' />
+            </div>
+            <div className='leftcell'>
+              Language:
+            </div>
+            <div className='rightcell'>
+              <input id='item_lang' type='text' />
+            </div>
+            <div className='leftcell'>
+              Lines of code:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_loc'
+                name='loc'
+                type='text'
+                value={loc}
+                className={this.hasError(locValid)}
+                onChange={(event) => this.handleUserInput(event)} />
+            </div>
+            <div className='leftcell'>
+              Image url:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_imgUrl'
+                name='imgUrl'
+                type='text'
+                value={imgUrl}
+                className={this.hasError(imgUrlValid)}
+                onChange={(event) => this.handleUserInput(event)} />
+            </div>
+            <div className='leftcell'>
+              Link:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_link'
+                name='link'
+                type='text'
+                value={link}
+                className={this.hasError(linkValid)}
+                onChange={(event) => this.handleUserInput(event)} />
+            </div>
+          </form>
+          <button disabled={!isEnabled} onClick={this.addItem}>Add item</button>
+        </div>
       </div>
     );
   }

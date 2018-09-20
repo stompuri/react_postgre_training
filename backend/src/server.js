@@ -44,7 +44,7 @@ const fetchAllItems = async () => {
 
 
 router.get('/api/getAll', async ctx => {
-  console.log("api/getAll");
+  console.log('api/getAll');
   const res = await fetchAllItems();
   console.log(res);
   ctx.type = 'application/json; charset=utf-8';
@@ -52,21 +52,21 @@ router.get('/api/getAll', async ctx => {
 });
 
 router.post('/api/addItem', async ctx => {
-  console.log("api/addItem");
+  console.log('api/addItem');
   console.log(ctx.request.body);
   console.log(ctx.request.body.title);
-  var response = { "id": null };
+  var response = { 'id': null };
   try {
     if (ctx.request.body.title) {
-      console.log("DEBUG1");
+      console.log('DEBUG1');
       response.id = await addItem(ctx.request.body);
-      console.log("Added with id:");
+      console.log('Added with id:');
       console.log(response);
     } else {
-      console.error("Can't add without a title!");
+      console.error('Can\'t add without a title!');
     }
   } catch (error) {
-    console.error("Couldn't add item with title " + ctx.request.body.title);
+    console.error('Couldn\'t add item with title ' + ctx.request.body.title);
     ctx.throw(500, 'Could not add item');
   }
   ctx.type = 'application/json; charset=utf-8';
@@ -74,21 +74,21 @@ router.post('/api/addItem', async ctx => {
 });
 
 router.get('/api/removeItem', async ctx => {
-  console.log("api/removeItem");
+  console.log('api/removeItem');
   try {
     if (ctx.request.query.id) {
       const res = await removeItem(ctx.request.query.id);
-      console.log("DEBUG");
+      console.log('DEBUG');
       console.log(res.rowCount);
       if(res.rowCount == 0) {
-        ctx.throw(500, "Couldn't find an item with id " + ctx.request.query.id);
+        ctx.throw(500, 'Couldn\'t find an item with id ' + ctx.request.query.id);
       }
-      console.log("Removed item with an id " + ctx.request.query.id);
+      console.log('Removed item with an id ' + ctx.request.query.id);
     } else {
-      console.error("Can't remove without an id!");
+      console.error('Can\'t remove without an id!');
     }
   } catch (error) {
-    console.error("Couldn't remove item with an id " + ctx.request.query.id);
+    console.error('Couldn\'t remove item with an id ' + ctx.request.query.id);
     ctx.throw(500, 'Could not delete item');
   }
   ctx.type = 'application/json; charset=utf-8';
@@ -98,5 +98,5 @@ router.get('/api/removeItem', async ctx => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-const server = app.listen(PORT);
+app.listen(PORT);
 console.log(`App listening on port ${PORT}`);

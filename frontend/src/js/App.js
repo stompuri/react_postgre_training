@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="main-container">
           <Route path="/" component={Header} />
           <Route path="/about" exact component={this.pageShell(About)}></Route>
           <Route path="/contact" exact component={this.pageShell(Contact)}></Route>

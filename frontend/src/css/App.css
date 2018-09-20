@@ -1,15 +1,28 @@
-.list_container {
-  	transition: transform 1s;
-}
-.list_container_NOT {
-  height: auto;
-  max-height: 0px;
-  overflow:hidden;
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.list_container_NOT:not(:empty) {
-  max-height: 500px;
-  transition:max-height 1s ease-in;
+button {
+  padding: 10px;
+}
+
+.main-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  padding-top: 20px;
+  width: 100%;
+  background: #dddddd;
+}
+
+.hide {
+  display: none;
+}
+
+.list_container {
+  transition: transform 1s;
 }
 
 .navi {
@@ -132,16 +145,6 @@
     transition: all 0.2s linear;
 }
 
-.container {
-  position: relative;
-  max-width: 500px;
-}
-
-.container button {
-  padding: 10px;
-
-}
-
 .leftcell {
   float: left;
   clear: left;
@@ -165,4 +168,149 @@
 
 .formGroup input {
   width: 98%;
+}
+
+/* RESPONSIVE CONTAINERS
+============================================================================= */
+.view-form {
+  padding:5px;
+  border-style:dotted;
+  border-width:1px;
+  min-width: 300px;
+  display: table-cell;
+}
+.container {
+  max-width: 500px;
+}
+
+.view-container {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.viewitems {
+  max-width: 500px;
+  top:100px;
+  vertical-align: top;
+  text-align:left;
+}
+
+.view-item {
+  max-width:500px;
+}
+
+/*@media all and (min-width:800px) {*/
+@media all and (min-width:800px) {
+    /* styles for browsers larger than 960px; */
+  .container {
+    max-width: 800px;
+  }
+
+  .view-container {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .viewitems {
+    max-width: 780px;
+    top:100px;
+    vertical-align: top;
+    text-align:left;
+  }
+
+  .view-item {
+    max-width:500px;
+  }
+}
+
+@media only screen and (max-device-width:480px){
+   /* styles for mobile browsers smaller than 480px; */
+  .container {
+    max-width: 480px;
+  }
+
+  .view-container {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .viewitems {
+    max-width: 480px;
+    top:100px;
+    vertical-align: top;
+    text-align:left;
+  }
+}
+@media only screen and (device-width:768px){
+   /* tablets */
+  .container {
+    max-width: 768px;
+  }
+
+  .view-container {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .viewitems {
+    max-width: 768px;
+    top:100px;
+    vertical-align: top;
+    text-align:left;
+  }
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only */
+  .container {
+    max-width: 481px;
+  }
+
+  .view-container {
+    max-width: 481px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .viewitems {
+    max-width: 481px;
+    top:100px;
+    vertical-align: top;
+    text-align:left;
+  }
+}
+@media screen and (max-width:480px) {
+  .rightcell {
+    float: left;
+  }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only */
+  .container {
+    max-width: 600px;
+  }
+
+  .view-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .viewitems {
+    max-width: 600px;
+    top:100px;
+    vertical-align: top;
+    text-align:left;
+  }
 }

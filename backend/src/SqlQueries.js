@@ -24,12 +24,12 @@ module.exports = function(body) {
   if(body.link) query_parts.push(body.link);
   query_parts.push("') RETURNING id;");
   var add_item_query = query_parts.join('').replace(/''/g, '')
-                                  .replace(/,,/g, '')
-                                  .replace(/,\)/g, ')')
-                                  .replace(/\(,/g, '(');
+    .replace(/,,/g, '')
+    .replace(/,\)/g, ')')
+    .replace(/\(,/g, '(');
   console.log(add_item_query);
 
   return {
     "add_item": add_item_query
-  }
-}
+  };
+};
