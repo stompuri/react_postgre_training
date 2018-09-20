@@ -18,10 +18,10 @@ export function listUpdateFailed() {
   });
 }
 
-export function addItem(title) {
+export function addItem(body) {
   dispatcher.dispatch({
     type: 'ADD_ITEM',
-    title,
+    body,
   });
 }
 

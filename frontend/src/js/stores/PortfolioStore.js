@@ -48,7 +48,7 @@ class PortfolioStore extends EventEmitter {
   }
 
   async addItem(body) {
-    console.log('PortfolioStore.js - addItem with item:');
+    console.log('PortfolioStore.js - addItem:');
     console.log(body);
 
     this.loading = true;
@@ -149,7 +149,7 @@ class PortfolioStore extends EventEmitter {
       this.listActionFailed();
       break;
     case 'ADD_ITEM':
-      this.addItem(action.title);
+      this.addItem(action.body);
       break;
     case 'DELETE_ITEM':
       this.removeItem(action.id);

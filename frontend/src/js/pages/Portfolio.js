@@ -78,21 +78,11 @@ class Portfolio extends Component {
       loading: PortfolioStore.getLoading()
     };
 
-    this.updateState = this.updateState.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('Portfolio.js - register change event listener');
     PortfolioStore.on('change', () => {
-      console.log('Portfolio.js - received change event');
-      this.updateState();
-    });
-  }
-
-  updateState() {
-    this.setState({
-      portfolio_items: PortfolioStore.getAll(),
-      loading: PortfolioStore.getLoading(),
+      this.setState({
+        portfolio_items: PortfolioStore.getAll(),
+        loading: PortfolioStore.getLoading(),
+      });
     });
   }
 
@@ -100,7 +90,7 @@ class Portfolio extends Component {
     const { portfolio_items, loading } = this.state;
 
     var dom = '';
-    if (loading) {
+    /*if (loading) {
       dom = <div className='loader'>Loading...</div>;
     } else {
       dom = <PortfolioList items={portfolio_items} />;
@@ -111,6 +101,8 @@ class Portfolio extends Component {
         { dom }
       </div>
     );
+    */
+    return <PortfolioList items={portfolio_items} />;
   }
 }
 
