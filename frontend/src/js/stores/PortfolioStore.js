@@ -9,7 +9,6 @@ class PortfolioStore extends EventEmitter {
     super();
     this.list = [];
     this.loading = true;
-    console.log('PortfolioStore constructed, calling updateList');
     this.updateList();
   }
 
@@ -17,7 +16,6 @@ class PortfolioStore extends EventEmitter {
     this.loading = true;
     const _this = this;
     const uri = encodeURI(`${baseURL}/getAll`);
-    console.log('PortfolioStore - updateList called with: ' + uri);
     try {
       fetch(uri)
         .then(function(response) {
@@ -37,7 +35,6 @@ class PortfolioStore extends EventEmitter {
   }
 
   listUpdated() {
-    console.log('list updated, sending change event');
     this.loading = false;
     this.emit('change');
   }
@@ -48,9 +45,6 @@ class PortfolioStore extends EventEmitter {
   }
 
   async addItem(body) {
-    console.log('PortfolioStore.js - addItem:');
-    console.log(body);
-
     this.loading = true;
     const _this = this;
     if (body) {
@@ -62,7 +56,6 @@ class PortfolioStore extends EventEmitter {
         body: JSON.stringify(body)
       });
 
-      console.log(addRequest);
       try {
         fetch(addRequest)
           .then((response) => {
@@ -137,7 +130,6 @@ class PortfolioStore extends EventEmitter {
   }
 
   handleActions(action) {
-    console.log('PortfolioStore received an action: ', action.type);
     switch(action.type) {
     case 'UPDATE_LIST':
       this.updateList();
@@ -155,7 +147,7 @@ class PortfolioStore extends EventEmitter {
       this.removeItem(action.id);
       break;
     default:
-      console.log('No action defined for "' + action.type + '"');
+      console.log('<PortfolioStore> No action defined for "' + action.type + '"');
       break;
     }
   }

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import '../../css/App.css';
+import '../../css/portfolio.css';
+import '../../css/removeitem.css';
 import * as PortfolioActions from '../actions/PortfolioActions';
 
 class RemoveItem extends Component {
   constructor() {
     super();
     this.state = {
-      showRemoveForm: false
+      showRemoveForm: false,
+      id: ''
     };
-    this.toggleRemoveForm = this.toggleRemoveForm.bind(this);
   }
 
-  toggleRemoveForm() {
+  toggleRemoveForm = () => {
     var show = false;
     if (!this.state.showRemoveForm) {
       show = true;
@@ -30,30 +32,44 @@ class RemoveItem extends Component {
   }
 
   showForm(val) {
-    return(val ? '' : 'hide');
+    return(val ? 'dropdown show' : 'dropdown hide');
+  }
+
+
+  hasError(val) {
+    return(val ? 'dropdown show' : 'dropdown hide');
+  }
+
+  handleUserInput = name => event => {
+    this.setState({[name]: event.target.value});
   }
 
   render() {
-    const { showRemoveForm } = this.state;
+    const { showRemoveForm, id } = this.state;
+    const isEnabled = !(isNaN(id) || id < 0);
+    const hasError = isEnabled ? '' : 'invalid-value';
 
     return (
-      <div className='container'>
-        { showRemoveForm &&
-          <div className='dropdown' onClick={this.toggleRemoveForm}>
-            Hide Remove Form
-          </div>
-        }
-        { !showRemoveForm &&
-          <div className='dropdown' onClick={this.toggleRemoveForm}>
-            Show Remove Form
-          </div>
-        }
+      <div className='remove-item'>
+        <div className='dropdown-trigger' onClick={this.toggleRemoveForm}>
+          Remove item
+        </div>
 
         <div className={this.showForm(showRemoveForm)}>
-          <div className='formGroup'>
-            <input id='item_id' type='text' />
-            <button onClick={this.removeItem}>Remove item with ID</button>
-          </div>
+          <form id='remove_item_form' className="formGroup">
+            <div className='leftcell'>
+              ID:
+            </div>
+            <div className='rightcell'>
+              <input
+                id='item_id'
+                type='text'
+                value={id}
+                className={hasError}
+                onChange={this.handleUserInput('id')} />
+            </div>
+          </form>
+          <button disabled={isEnabled} onClick={this.removeItem}>Remove item with ID</button>
         </div>
       </div>
     );

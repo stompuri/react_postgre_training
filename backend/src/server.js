@@ -44,21 +44,19 @@ const fetchAllItems = async () => {
 
 
 router.get('/api/getAll', async ctx => {
-  console.log('api/getAll');
+  console.log('GET: "api/getAll"');
   const res = await fetchAllItems();
-  console.log(res);
   ctx.type = 'application/json; charset=utf-8';
   ctx.body = res;
 });
 
 router.post('/api/addItem', async ctx => {
-  console.log('api/addItem');
+  console.log('POST: "api/addItem"');
   console.log(ctx.request.body);
   console.log(ctx.request.body.title);
   var response = { 'id': null };
   try {
     if (ctx.request.body.title) {
-      console.log('DEBUG1');
       response.id = await addItem(ctx.request.body);
       console.log('Added with id:');
       console.log(response);
@@ -74,11 +72,10 @@ router.post('/api/addItem', async ctx => {
 });
 
 router.get('/api/removeItem', async ctx => {
-  console.log('api/removeItem');
+  console.log('GET: "api/removeItem"');
   try {
     if (ctx.request.query.id) {
       const res = await removeItem(ctx.request.query.id);
-      console.log('DEBUG');
       console.log(res.rowCount);
       if(res.rowCount == 0) {
         ctx.throw(500, 'Couldn\'t find an item with id ' + ctx.request.query.id);

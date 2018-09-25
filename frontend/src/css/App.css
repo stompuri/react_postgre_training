@@ -17,22 +17,8 @@ button {
   background: #dddddd;
 }
 
-.hide {
-  display: none;
-}
-
 .list_container {
   transition: transform 1s;
-}
-
-.navi {
-  width: 100%;
-  text-align: center;
-}
-
-.navi_item {
-  display: inline-block;
-  padding-left: 5px;
 }
 
 .SlideIn-appear {

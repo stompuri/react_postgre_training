@@ -1,0 +1,4 @@
+.remove-item .dropdown-trigger {
+  right: 120px;
+  z-index: 100;
+}

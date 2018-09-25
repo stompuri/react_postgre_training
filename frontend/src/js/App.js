@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
+import LoginStore from './stores/LoginStore';
 import '../css/App.css';
 import Header from './components/Header';
 import Portfolio from './pages/Portfolio';
@@ -8,8 +9,25 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      LoggedIn: LoginStore.isLoggedIn()
+    };
+
+    LoginStore.on('change', () => {
+      console.log("Got change event from LoginStore");
+      this.setState({
+        LoggedIn: LoginStore.isLoggedIn()
+      });
+    });
+  }
+
   pageShell(Page) {
-    return props =>
+    return (props) => {
+      console.log(this.state.LoggedIn);
+      return (
       <div className="page">
         <CSSTransitionGroup
           transitionAppear={true}
@@ -17,9 +35,10 @@ class App extends Component {
           transitionEnterTimeout={600}
           transitionLeaveTimeout={200}
           transitionName={props.match.path === '/about' ? 'SlideIn' : 'SlideOut'}>
-          <Page {...props} />
+          <Page LoggedIn={this.state.LoggedIn} {...props} />
         </CSSTransitionGroup>
-      </div>;
+      </div>
+    )};
   }
 
   render() {

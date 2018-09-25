@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../css/App.css';
 import '../../css/portfolio.css';
+import '../../css/additem.css';
 import * as PortfolioActions from '../actions/PortfolioActions';
 
 class AddItem extends Component {
@@ -22,23 +23,26 @@ class AddItem extends Component {
       linkValid: true,
       showAddForm: false
     };
-    this.toggleAddForm = this.toggleAddForm.bind(this);
   }
 
-  toggleAddForm() {
-    var show = false;
-    if (!this.state.showAddForm) {
-      show = true;
+  addItem() {
+    const body = {
+      'year': document.getElementById('item_year').value,
+      'title': document.getElementById('item_title').value,
+      'lang': document.getElementById('item_lang').value,
+      'desc': document.getElementById('item_desc').value,
+      'platform': document.getElementById('item_platform').value,
+      'loc': document.getElementById('item_loc').value,
+      'imgUrl': document.getElementById('item_imgUrl').value,
+      'link': document.getElementById('item_link').value
+    };
+
+    if (!body) {
+      console.log('action for empty form');
+    } else {
+      document.getElementById('add_item_form').reset();
+      PortfolioActions.addItem(body);
     }
-    this.setState({showAddForm: show});
-  }
-
-  handleUserInput (e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({[name]: value}, () => {
-      this.validateField(name, value);
-    });
   }
 
   validateField(fieldName, value) {
@@ -79,32 +83,26 @@ class AddItem extends Component {
     return pattern.test(str);
   }
 
+  toggleAddForm = ()  => {
+    var show = false;
+    if (!this.state.showAddForm) {
+      show = true;
+    }
+    this.setState({showAddForm: show});
+  }
+
+  handleUserInput = name => event => {
+    this.setState({[name]: event.target.value}, () => {
+      this.validateField(name, event.target.value);
+    });
+  }
+
   hasError(isValid) {
     return(isValid ? '' : 'invalid-value');
   }
-  
+
   showForm(val) {
-    return(val ? '' : 'hide');
-  }
-
-  addItem() {
-    const body = {
-      'year': document.getElementById('item_year').value,
-      'title': document.getElementById('item_title').value,
-      'lang': document.getElementById('item_lang').value,
-      'desc': document.getElementById('item_desc').value,
-      'platform': document.getElementById('item_platform').value,
-      'loc': document.getElementById('item_loc').value,
-      'imgUrl': document.getElementById('item_imgUrl').value,
-      'link': document.getElementById('item_link').value
-    };
-
-    if (!body) {
-      console.log('action for empty form');
-    } else {
-      document.getElementById('add_item_form').reset();
-      PortfolioActions.addItem(body);
-    }
+    return(val ? 'dropdown show' : 'dropdown hide');
   }
 
   render() {
@@ -123,17 +121,10 @@ class AddItem extends Component {
     const isEnabled = titleValid && yearValid;
 
     return (
-      <div className='container'>
-        { showAddForm &&
-          <div className='dropdown' onClick={this.toggleAddForm}>
-            Hide Add Form
-          </div>
-        }
-        { !showAddForm &&
-          <div className='dropdown' onClick={this.toggleAddForm}>
-            Show Add Form
-          </div>
-        }
+      <div className='add-item'>
+        <div className='dropdown-trigger' onClick={this.toggleAddForm}>
+          Add Item
+        </div>
 
         <div className={this.showForm(showAddForm)}>
           <form id='add_item_form' className="formGroup">
@@ -143,11 +134,10 @@ class AddItem extends Component {
             <div className='rightcell'>
               <input
                 id='item_title'
-                name='title'
                 type='text'
                 value={title}
                 className={this.hasError(titleValid)}
-                onChange={(event) => this.handleUserInput(event)} />
+                onChange={this.handleUserInput('title')} />
             </div>
             <div className='leftcell'>
               Year:
@@ -155,11 +145,10 @@ class AddItem extends Component {
             <div className='rightcell'>
               <input
                 id='item_year'
-                name='year'
                 type='text'
                 value={year}
                 className={this.hasError(yearValid)}
-                onChange={(event) => this.handleUserInput(event)} />
+                onChange={this.handleUserInput('year')} />
             </div>
             <div className='leftcell'>
               Description:
@@ -185,11 +174,10 @@ class AddItem extends Component {
             <div className='rightcell'>
               <input
                 id='item_loc'
-                name='loc'
                 type='text'
                 value={loc}
                 className={this.hasError(locValid)}
-                onChange={(event) => this.handleUserInput(event)} />
+                onChange={this.handleUserInput('loc')} />
             </div>
             <div className='leftcell'>
               Image url:
@@ -197,11 +185,10 @@ class AddItem extends Component {
             <div className='rightcell'>
               <input
                 id='item_imgUrl'
-                name='imgUrl'
                 type='text'
                 value={imgUrl}
                 className={this.hasError(imgUrlValid)}
-                onChange={(event) => this.handleUserInput(event)} />
+                onChange={this.handleUserInput('imgUrl')} />
             </div>
             <div className='leftcell'>
               Link:
@@ -209,11 +196,10 @@ class AddItem extends Component {
             <div className='rightcell'>
               <input
                 id='item_link'
-                name='link'
                 type='text'
                 value={link}
                 className={this.hasError(linkValid)}
-                onChange={(event) => this.handleUserInput(event)} />
+                onChange={this.handleUserInput('link')} />
             </div>
           </form>
           <button disabled={!isEnabled} onClick={this.addItem}>Add item</button>

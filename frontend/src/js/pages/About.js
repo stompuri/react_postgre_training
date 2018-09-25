@@ -6,7 +6,7 @@ class About extends Component {
   render() {
     return (
       <div className="about">
-        Welcome to React - Flux - PostgreSQL sample site
+        About page
       </div>
     );
   }

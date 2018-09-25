@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 import PortfolioStore from '../stores/PortfolioStore';
+import AddItem from '../components/AddItem';
+import RemoveItem from '../components/RemoveItem';
 import '../../css/App.css';
 import '../../css/portfolio.css';
 
@@ -71,11 +73,13 @@ function PortfolioList(props) {
 }
 
 class Portfolio extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       portfolio_items: PortfolioStore.getAll(),
-      loading: PortfolioStore.getLoading()
+      loading: PortfolioStore.getLoading(),
+      LoggedIn: props.LoggedIn
     };
 
     PortfolioStore.on('change', () => {
@@ -87,7 +91,7 @@ class Portfolio extends Component {
   }
 
   render() {
-    const { portfolio_items, loading } = this.state;
+    const { portfolio_items, loading, LoggedIn } = this.state;
 
     var dom = '';
     if (loading) {
@@ -98,6 +102,13 @@ class Portfolio extends Component {
 
     return (
       <div>
+        { LoggedIn &&
+          <div className="admin-container">
+            <AddItem />
+            <RemoveItem />
+          </div>
+        }
+
         { dom }
       </div>
     );

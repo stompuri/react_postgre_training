@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Login from '../components/Login';
 import '../../css/App.css';
-import '../../css/Header.css';
-import AddItem from './AddItem';
-import RemoveItem from './RemoveItem';
+import '../../css/header.css';
 
 class Header extends Component {
   render() {
@@ -31,8 +30,7 @@ class Header extends Component {
           </div>
         </div>
 
-        <AddItem />
-        <RemoveItem />
+        <Login />
       </div>
     );
   }
